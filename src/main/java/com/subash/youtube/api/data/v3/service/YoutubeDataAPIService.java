@@ -97,10 +97,11 @@ public class YoutubeDataAPIService {
                     .forEach(file -> {
                         VideoUploadView videoUploadView = new VideoUploadView();
                         String path = folderPath + "/" + file.getFileName().toString();
-                        String title = file.getFileName().toString().replace('-', '|');
-                        String description = file.getFileName().toString().replace('-', '|');
+                        String titleAndDescription = file.getFileName().toString().replace('-', '|');
+                        // To remove .mp4 extension
+                        titleAndDescription = titleAndDescription.substring(0, titleAndDescription.length() - 4);
                         String privacyStatus = "private";
-                        responseUrlList.add(uploadVideo(path, title, description, privacyStatus));
+                        responseUrlList.add(uploadVideo(path, titleAndDescription, titleAndDescription, privacyStatus));
                     });
         } catch (Exception e) {
             logger.error("Error processing the folder");
